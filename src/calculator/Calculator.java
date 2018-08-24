@@ -57,6 +57,26 @@ class Calculator {
             default:
                 return "error";
         }
+        if (expression.length < 6) {
+            return String.valueOf(result);
+        }
+        Double d = Double.parseDouble(expression[6]);
+        switch (expression[5]) {
+            case "+":
+                result = result + c;
+                break;
+            case "-":
+                result = result - c;
+                break;
+            case "*":
+                result = result * c;
+                break;
+            case "/":
+                result = result / c;
+                break;
+            default:
+                return "error";
+        }
         return String.valueOf(result);
 
         // valueOf -- preobrazuet iz cifr v teksts
