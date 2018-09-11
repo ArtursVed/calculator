@@ -15,7 +15,7 @@ class Calculator {
 
         int brOpenInd = -1;
         do {
-            brOpenInd = -1;
+            brOpenInd = -1; // aaa
             for (int i = 0; i < tmp.size(); i++) {
                 String a = tmp.get(i);
                 if (a.equals("(")) {
