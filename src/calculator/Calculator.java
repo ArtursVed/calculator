@@ -11,11 +11,33 @@ import java.util.List;
 class Calculator {
 
     String calculate(String[] expression) {
+        var tmp = new ArrayList<>(List.of(expression)); //var - vmesto List<String> v 10.0 java
+
+        int brOpenInd = -1;
+        do {
+            brOpenInd = -1;
+            for (int i = 0; i < tmp.size(); i++) {
+                String a = tmp.get(i);
+                if (a.equals("(")) {
+                    brOpenInd = i;
+                } else if (a.equals(")")) {
+                    var inBr = tmp.subList(brOpenInd + 1, i);
+                    var result = calculate(inBr);
+                    tmp.subList(brOpenInd, i + 1).clear();
+                    tmp.add(brOpenInd, result);
+                    break;
+                }
+            }
+        } while (brOpenInd != -1);
+
+        return calculate(tmp);
+    }
+    String calculate(List<String> expression) {
         List<String> tmp = new ArrayList<>(); // List podobmo massivu, no namnogo udobnee ; tmp -- peremennaja (temperaru)
-                double a = Double.parseDouble(expression[0]);
-        for (int i = 1; i < expression.length; i +=2){
-            String op = expression[i];
-            double b = Double.parseDouble(expression[i+1]);
+                double a = Double.parseDouble(expression.get(0));
+        for (int i = 1; i < expression.size(); i +=2){
+            String op = expression.get(i);
+            double b = Double.parseDouble(expression.get(i+1));
             switch (op) {
                 case "+":
                 case "-":
